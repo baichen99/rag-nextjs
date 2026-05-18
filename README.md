@@ -39,7 +39,7 @@
 | **Next.js 16** | 全栈框架（前端 + API） | 官方最新版，App Router，开发体验好 |
 | **TypeScript** | 类型安全 | 大型项目必需，减少低级错误 |
 | **LangChain.js** | LLM 调用、文档处理、向量存储 | 生态成熟，抽象合理 |
-| **Chroma** | 向量数据库 | 开源、轻量、本地运行、不需要 Docker |
+| **Chroma** | 向量数据库 | 服务端用 Python 写，客户端有 npm 包；本地运行、不需要 Docker |
 | **Aliyun DashScope** | LLM (DeepSeek) + Embedding + Rerank | 国内稳定、价格低、API 兼容 OpenAI 格式 |
 | **Tailwind CSS** | UI 样式 | 快速构建，不用写 CSS 文件 |
 | **pnpm** | 包管理 | 速度快，磁盘占用小 |
@@ -47,7 +47,7 @@
 ### 为什么不选其他方案？
 
 **Q: 为什么不用 Pinecone / Weaviate / Milvus？**
-> 这些都需要注册账号或 Docker。Chroma 纯本地运行，pip 装一下就能用，最适合教程。
+> 这些都需要注册账号或 Docker。Chroma 服务端用 Python 写，pip 装一下就能本地启动；Node.js 代码通过 npm 客户端库连接，零配置、最适合教程。
 
 **Q: 为什么不用 OpenAI API？**
 > Aliyun DashScope 兼容 OpenAI 格式，但国内访问稳定，且 Embedding 和 Rerank 都是阿里自己的模型，效果不差。
@@ -562,7 +562,26 @@ export const llm = new ChatOpenAI({
 
 ## 九、常见问题 FAQ
 
-### Q1: Chroma 启动失败 / 端口被占用
+### Q1: Chroma 不是有 npm 包吗？为什么还需要 pip 安装？
+
+**一句话：npm 包装的是客户端，pip 安装的是服务端，两者缺一不可。**
+
+Chroma 的架构是 C/S 模式：
+
+| | `pip install chromadb` | `npm install chromadb` |
+|---|---|---|
+| 角色 | **服务端**（Python 写的） | **客户端**（JS HTTP 调用库） |
+| 功能 | `chroma run` 启动本地 HTTP 服务 | 从 Node.js 代码发 HTTP 请求连接服务端 |
+| 项目中 | 必需，没有它就没有数据库服务 | 已装在 `node_modules`，被 LangChain.js 间接依赖 |
+
+流程：
+```
+Node.js 代码 —(HTTP)—> Chroma 服务端(Python, localhost:8000) —(本地文件)—> data/chroma/
+```
+
+LangChain.js 的 `Chroma` 类只负责发 HTTP 请求，实际存储、索引、向量计算都在 Python 服务端完成。
+
+### Q2: Chroma 启动失败 / 端口被占用
 
 ```bash
 # 检查 8000 端口是否被占用
