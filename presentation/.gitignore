@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Content planning files (not tracked)
+article.md
+script.md
+outline.md
