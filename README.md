@@ -1,5 +1,7 @@
 # Next.js Docs RAG - 5 版本演进教程
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbaichen99%2Frag-nextjs)
+
 ## 一、这个项目是做什么的？
 
 这是一个**从零开始教你构建 RAG（检索增强生成）系统**的完整项目。我们用 Next.js 官方文档做知识库，实现了 **5 个逐步优化的 RAG 版本**，并在同一个前端界面上并排对比它们的效果。
