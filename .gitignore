@@ -69,16 +69,8 @@ eval-runner.ts
 /presentation
 
 # sibling projects (not part of this repo)
-ai-leadership/
-jd-analysis/
-model-compare/
-rag/
-stream-render/
-package-lock.json
 
 # IDE
-.vscode/
 
 # empty leftover dir
-rag-nextjs/
 
