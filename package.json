@@ -1,6 +1,7 @@
 {
   "name": "rag-nextjs",
   "version": "0.1.0",
+  "description": "从零构建 5 版本 RAG 系统，基于 Next.js 官方文档，并排对比 Vector-only / Hybrid / Rerank / Chunking / Query-Rewrite 的演进效果。",
   "private": true,
   "scripts": {
     "dev": "next dev",

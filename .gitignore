@@ -1,32 +1,84 @@
-# Dependencies
-node_modules/
-__pycache__/
-*.egg-info/
-.eggs/
-dist/
-build/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Environment
-.env
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
 .env.local
-.env.*.local
+.env.production
+.env.development
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# data files
+data/nextjs-docs/
+data/chunks-*.json
+data/parents-*.json
+data/chroma/
+data/eval-results/*
+!data/eval-results/.gitkeep
+
+# python venv
+.venv/
+
+# chroma log
+chroma.log
+
+# video drafts
+article.md
+outline.md
+script.md
+project.md
+eval-dataset.ts
+eval-metrics.ts
+eval-runner.ts
+
+# presentation sub-project
+/presentation
+
+# sibling projects (not part of this repo)
+ai-leadership/
+jd-analysis/
+model-compare/
+rag/
+stream-render/
+package-lock.json
 
 # IDE
-.idea/
 .vscode/
-*.swp
-*.swo
-*~
 
-# OS
-.DS_Store
-Thumbs.db
+# empty leftover dir
+rag-nextjs/
 
-# Logs
-*.log
-logs/
-
-# Output
-output/
-tmp/
-temp/
