@@ -1,0 +1,468 @@
+/* ── Q1 Eval · RAG 召回率怎么评估 ── */
+/* 前缀: q1- */
+
+.q1-scene {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ═════════════════ Step 0: 老板问话 ═════════════════ */
+
+.q1-step0 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q1-main {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.q1-bubble {
+  padding: 28px 40px;
+  border-radius: var(--r-card);
+  max-width: 520px;
+  animation: q1-pop-in 0.5s var(--ease-enter) both;
+}
+
+.q1-bubble-boss {
+  background: var(--surface);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  align-self: flex-start;
+  position: relative;
+}
+
+.q1-bubble-boss::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 40px;
+  width: 24px;
+  height: 24px;
+  background: var(--surface);
+  border-right: var(--card-border);
+  border-bottom: var(--card-border);
+  transform: rotate(45deg);
+}
+
+.q1-bubble-you {
+  background: var(--text);
+  color: var(--shell);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow-mint);
+  align-self: flex-end;
+  animation-delay: 0.25s;
+  position: relative;
+}
+
+.q1-bubble-you::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  right: 40px;
+  width: 24px;
+  height: 24px;
+  background: var(--text);
+  border-right: var(--card-border);
+  border-bottom: var(--card-border);
+  transform: rotate(45deg);
+}
+
+.q1-bubble-text {
+  font-family: var(--font-display-cn);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.q1-bubble-mute {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 48px;
+  color: var(--text-mute);
+}
+
+.q1-step0-label {
+  animation: q1-fade-in 0.4s ease 0.5s both;
+}
+
+/* ═════════════════ Step 1: 90% 没评估 ═════════════════ */
+
+.q1-step1 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q1-big-num-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: q1-pop-in 0.6s var(--ease-enter) both;
+}
+
+.q1-big-num {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 200px;
+  line-height: 0.85;
+  color: var(--accent);
+  letter-spacing: -0.04em;
+}
+
+.q1-big-pct {
+  font-size: 120px;
+  color: var(--text-2);
+}
+
+.q1-big-label {
+  font-family: var(--font-display-cn);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.q1-sub-cards {
+  display: flex;
+  gap: 20px;
+  margin-top: 16px;
+  animation: q1-fade-in 0.5s ease 0.4s both;
+}
+
+.q1-sub-card {
+  padding: 20px 28px;
+  background: var(--surface);
+  border: var(--card-border);
+  border-radius: var(--r-card);
+  box-shadow: var(--card-shadow-small);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.q1-sub-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--text-2);
+}
+
+.q1-sub-text {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+/* ═════════════════ Step 2: 4 类评估集 ═════════════════ */
+
+.q1-step2 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q1-main-grid {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.q1-grid-label {
+  animation: q1-fade-in 0.3s ease both;
+}
+
+.q1-cat-grid {
+  display: flex;
+  gap: 20px;
+  animation: q1-pop-in 0.5s var(--ease-enter) 0.1s both;
+}
+
+.q1-cat-card {
+  width: 200px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.q1-cat-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+}
+
+.q1-cat-count {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 56px;
+  color: var(--text);
+  line-height: 0.9;
+  margin-top: 4px;
+}
+
+.q1-cat-name {
+  font-family: var(--font-display-cn);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.q1-cat-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-mute);
+}
+
+.q1-code-hint {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: q1-fade-in 0.4s ease 0.5s both;
+}
+
+.q1-hint-text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-2);
+  letter-spacing: 0.04em;
+}
+
+/* ═════════════════ Step 3: 代码高亮 ═════════════════ */
+
+.q1-step3 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q1-main-code {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.q1-code-label {
+  animation: q1-fade-in 0.3s ease both;
+}
+
+.q1-code-wrap {
+  animation: q1-pop-in 0.5s var(--ease-enter) 0.1s both;
+}
+
+.q1-code-card {
+  padding: 36px 44px;
+  min-width: 720px;
+}
+
+.q1-code-block {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.q1-code-fn {
+  margin-bottom: 2px;
+}
+
+.q1-code-line {
+  white-space: pre;
+}
+
+.q1-code-indent {
+  padding-left: 24px;
+}
+
+.q1-code-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 20px 0;
+}
+
+.q1-code-comment {
+  color: #6B9B8A;
+  font-style: italic;
+}
+
+/* Syntax tokens */
+.tk-k { color: #FF7A59; font-weight: 700; }   /* keyword */
+.tk-f { color: #FFD23F; font-weight: 700; }   /* function */
+.tk-v { color: #7DD3FC; }                     /* variable */
+.tk-t { color: #38D399; }                     /* type */
+.tk-p { color: #C5BCAF; }                     /* punctuation */
+.tk-o { color: #FF7A59; }                     /* operator */
+.tk-n { color: #F472B6; }                     /* number */
+
+.q1-metric-legend {
+  display: flex;
+  gap: 32px;
+  animation: q1-fade-in 0.4s ease 0.4s both;
+}
+
+.q1-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.q1-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.q1-legend-text {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+/* ═════════════════ Step 4: 数据对比 ═════════════════ */
+
+.q1-step4 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q1-main-data {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.q1-data-label {
+  animation: q1-fade-in 0.3s ease both;
+}
+
+.q1-data-card {
+  padding: 36px 44px;
+  width: 640px;
+  animation: q1-pop-in 0.5s var(--ease-enter) 0.1s both;
+}
+
+.q1-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 16px;
+}
+
+.q1-data-table thead th {
+  text-align: left;
+  padding: 12px 16px;
+  color: var(--text-mute);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-bottom: 2px solid var(--text);
+}
+
+.q1-data-table tbody td {
+  padding: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.q1-data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.q1-cat-tag {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.q1-data-num {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--text);
+}
+
+.q1-num-danger {
+  color: var(--danger);
+}
+
+.q1-row-highlight {
+  background: rgba(255, 92, 122, 0.08);
+}
+
+.q1-data-anno {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--rule);
+}
+
+.q1-anno-text {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--danger);
+  font-weight: 500;
+}
+
+/* ═════════════════ Keyframes ═════════════════ */
+
+@keyframes q1-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes q1-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

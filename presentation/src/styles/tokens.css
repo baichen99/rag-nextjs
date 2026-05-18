@@ -1,0 +1,165 @@
+/* ─────────────────────────────────────────────────────────────────────
+ * Theme · harmopath  (Harmony Pop · Direction A · Dark)
+ *
+ *   Dark variant: warm ink canvas + coral-orange primary + mint-green secondary
+ *               + game-card / ticket aesthetic (offset stamp shadows, bold
+ *               italic numbers, dot/stripe corner decorations).
+ *
+ *   ── Signature 3D effect ────────────────────────────────────────────
+ *   `--card-shadow` here is NOT a soft SaaS lift — it's a HARD OFFSET
+ *   color block (`4px 4px 0 accent`) that makes elements look like
+ *   stickers / game cards / printed tickets stacked on the page.
+ *   Pair with `--card-border` (1.5px solid ink) and the visual is
+ *   unmistakable.
+ *
+ *   See `SIGNATURE.md` next to this file for the full visual DNA
+ *   chapters should apply.
+ * ───────────────────────────────────────────────────────────────────── */
+:root {
+  /* ─── palette ─── */
+  --shell:        #121110;
+  --surface:      #1A1816;
+  --surface-2:    #24201C;
+  --surface-3:    #2E2924;       /* chip background — warm charcoal */
+  --text:         #F0EBE3;
+  --text-2:       #B5ADA3;
+  --text-mute:    #857D74;
+  --text-faint:   #5A544E;
+  --rule:         #3A342E;
+
+  /* primary — coral orange (CTA / hero accent) */
+  --accent:       #FF7A59;
+  --accent-soft:  #3D2720;
+  --accent-glow:  rgba(255, 122, 89, 0.45);
+  --accent-ink:   #FFFFFF;       /* contrast text on --accent fill */
+
+  /* secondary — mint green (success / progress / positive) */
+  --accent-2:      #38D399;
+  --accent-2-soft: rgba(56, 211, 153, 0.14);
+  --accent-2-glow: rgba(56, 211, 153, 0.50);
+  --accent-2-ink:  #0A2A1C;       /* contrast text on --accent-2 fill */
+
+  /* tertiary — lemon yellow (stars / rewards, used sparingly) */
+  --accent-3:      #FFD23F;
+
+  /* danger (alert / negative state) */
+  --danger:        #FF5C7A;
+
+  /* ─── fonts ─── */
+  --font-display-cn: "HarmonyOS Sans SC", "PingFang SC", "Noto Sans SC", -apple-system, sans-serif;
+  --font-display-en: "Nunito", "HarmonyOS Sans SC", system-ui, sans-serif;
+  --font-body:       "HarmonyOS Sans SC", "PingFang SC", "Noto Sans SC", -apple-system, sans-serif;
+  --font-mono:       "JetBrains Mono", ui-monospace, monospace;
+  --font-features:   "ss01", "tnum";
+
+  /* ─── motion: energetic / game-like ─── */
+  --dur-base:       380ms;
+  --dur-slow:       650ms;
+  --dur-cinematic:  1000ms;
+
+  /* ── motion personality tokens (read from theme.json motion: "energetic") ──
+   *
+   * --ease-enter  : spring overshoot — the harmopath "pop". Use for cards
+   *                 arriving, numbers landing, hero text appearing.
+   * --ease-exit   : fast out — element leaves quickly, never lingers.
+   * --ease-smooth : expo-out — for continuous reveals (bars growing, masks
+   *                 wiping) where overshoot would look wrong.
+   *
+   * Chapter agents: prefer these vars over hardcoded cubic-bezier values.
+   * They travel with the theme so swapping themes retains motion personality.
+   * ──────────────────────────────────────────────────────────────────────── */
+  --ease-enter:    cubic-bezier(0.34, 1.56, 0.64, 1);    /* spring pop      */
+  --ease-exit:     cubic-bezier(0.55, 0,    1,    0.45); /* fast out        */
+  --ease-smooth:   cubic-bezier(0.16, 1,    0.3,  1);    /* expo-out        */
+
+  /* ── named step durations ───────────────────────────────────────────────
+   * --dur-step    : primary animation for the main per-step reveal (card in,
+   *                 title in). Matches --dur-base for harmopath.
+   * --dur-content : secondary elements within a step (data bars, bullets).
+   *                 Faster so they feel subordinate to the main motion.
+   * --dur-exit    : outgoing elements (fast; audience attention is on new).
+   * ──────────────────────────────────────────────────────────────────────── */
+  --dur-step:      380ms;
+  --dur-content:   260ms;
+  --dur-exit:      200ms;
+
+  /* ─── design identity ─── */
+  --r-card:        20px;           /* harmopath lg radius */
+  --r-stage:       0;
+  --rule-w:        1px;
+  --rule-style:    solid;
+  --hero-num-font:    var(--font-display-en);   /* Nunito */
+  --hero-num-style:   italic;                   /* italic, not normal — matches design ref */
+  --hero-num-weight:  900;
+  --hero-num-track:   -0.03em;
+  --stage-pad-x:   96px;
+  --stage-pad-y:   80px;
+
+  /* ─── ★ SIGNATURE: offset stamp shadow ────────────────────────────
+   * The hallmark of harmopath. Use on cards/badges/buttons to get the
+   * sticker-on-paper pseudo-3D effect. The accent-color shadow block
+   * sits 4–6px below-right of the card, no blur. Pair with a 1.5px
+   * solid ink border.
+   * ────────────────────────────────────────────────────────────── */
+  --card-shadow:        6px 6px 0 var(--accent);
+  --card-shadow-ink:    6px 6px 0 var(--text);       /* monotone variant */
+  --card-shadow-mint:   6px 6px 0 var(--accent-2);   /* secondary variant */
+  --card-shadow-small:  3px 3px 0 var(--text);       /* badge / inner pill */
+
+  /* card border — ticket-strict 1.5px solid ink (not the faint --rule) */
+  --card-border:        1.5px solid var(--text);
+  --card-border-soft:   1.5px dashed var(--accent);  /* dashed accent for empty/CTA states */
+
+  /* glass card (for overlays / frosted panels) */
+  --card-glass-bg:     rgba(26, 24, 22, 0.80);
+  --card-glass-border: rgba(58, 52, 46, 0.60);
+
+  /* stage shadow: deep glow on dark bg */
+  --shadow-stage:
+    0 32px 80px  rgba(0, 0, 0, 0.55),
+    0  0   0 1px rgba(240, 235, 227, 0.08);
+
+  /* ─── decorative patterns (used by primitive helpers in base.css) ───
+   * Repeating diagonal stripes the original design system slaps in the
+   * top-right corner of hero cards. Use sparingly — one card per scene.
+   * ────────────────────────────────────────────────────────────── */
+  --stripe-accent: repeating-linear-gradient(
+    45deg,
+    var(--accent) 0 4px,
+    transparent  4px 9px
+  );
+  --stripe-mint: repeating-linear-gradient(
+    60deg,
+    var(--accent-2) 0 4px,
+    transparent      4px 11px
+  );
+  --stripe-ink: repeating-linear-gradient(
+    45deg,
+    var(--text) 0 4px,
+    transparent  4px 9px
+  );
+
+  /* ─── stage ambient — auto-applied via .stage-frame ::after / ::before ───
+   * Three-layer recipe stacked on the dark ink surface to give the page
+   * "depth without noise" instead of feeling like a blank dark slide:
+   *
+   *   ::after (pattern) — sparse 24px dot grid (subtle grain)
+   *   ::before (vignette) — soft coral glow top-left + mint glow bottom-right
+   *                         + tighter inner edge tint
+   * ────────────────────────────────────────────────────────────── */
+  --surface-pattern:
+    radial-gradient(circle at 1px 1px, rgba(240, 235, 227, 0.06) 1px, transparent 0),
+    radial-gradient(circle at 13px 13px, rgba(255, 122, 89, 0.06) 1.5px, transparent 0);
+  --surface-pattern-size: 24px 24px, 48px 48px;
+  --surface-pattern-blend: normal;
+  --surface-pattern-opacity: 1;
+
+  /* multi-stop ambient glow: warm corner pools without dominating focal */
+  --surface-vignette:
+    radial-gradient(60% 50% at 10% 0%,
+      rgba(255, 122, 89, 0.12) 0%, transparent 60%),
+    radial-gradient(50% 45% at 95% 100%,
+      rgba(56, 211, 153, 0.10) 0%, transparent 60%),
+    radial-gradient(70% 60% at 50% 50%,
+      transparent 60%, rgba(0, 0, 0, 0.25) 100%);
+}

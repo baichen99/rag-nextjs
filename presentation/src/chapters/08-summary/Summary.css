@@ -1,0 +1,352 @@
+/* ── Summary · 总结 + 引导 ── */
+/* 前缀: su- */
+
+.su-scene {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.su-main {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* ═════════════════ Step 0: Cheatsheet ═════════════════ */
+
+.su-step0 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.su-top-label {
+  animation: su-fade-in 0.3s ease both;
+}
+
+.su-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 840px;
+  animation: su-pop-in 0.5s var(--ease-enter) 0.1s both;
+}
+
+.su-sheet-row {
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  animation: su-pop-in 0.4s var(--ease-enter) both;
+}
+
+.su-sheet-q {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.su-sheet-num {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--accent);
+  min-width: 36px;
+  letter-spacing: -0.02em;
+}
+
+.su-sheet-qtext {
+  font-family: var(--font-display-cn);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.su-sheet-a {
+  display: flex;
+  align-items: center;
+}
+
+.su-sheet-atext {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
+  letter-spacing: 0.04em;
+}
+
+/* ═════════════════ Step 1: Quote + Chart ═════════════════ */
+
+.su-step1 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.su-main-chart {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.su-quote-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  animation: su-pop-in 0.5s var(--ease-enter) both;
+  text-align: center;
+}
+
+.su-quote-mark {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 48px;
+  color: var(--accent);
+  line-height: 0.6;
+}
+
+.su-quote-line1 {
+  font-family: var(--font-display-cn);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 8px 0 0;
+}
+
+.su-quote-line2 {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-2);
+  margin: 0;
+}
+
+.su-highlight {
+  color: var(--accent-2);
+}
+
+.su-chart-card {
+  padding: 28px 36px;
+  width: 840px;
+  animation: su-pop-in 0.5s var(--ease-enter) 0.15s both;
+}
+
+.su-chart-svg {
+  width: 100%;
+  height: 260px;
+}
+
+.su-tick-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--text-mute);
+  text-anchor: end;
+  letter-spacing: 0.06em;
+}
+
+.su-x-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--text-2);
+  text-anchor: middle;
+  letter-spacing: 0.04em;
+}
+
+.su-legend-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--text-2);
+  letter-spacing: 0.06em;
+}
+
+/* ═════════════════ Step 2: GitHub ═════════════════ */
+
+.su-step2 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.su-gh-label {
+  animation: su-fade-in 0.3s ease both;
+}
+
+.su-gh-card {
+  padding: 40px 48px;
+  min-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: su-pop-in 0.5s var(--ease-enter) 0.1s both;
+}
+
+.su-gh-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.su-gh-logo {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--surface);
+  background: var(--text-mute);
+  width: 52px;
+  height: 52px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.su-gh-repo {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 32px;
+  color: var(--surface);
+  letter-spacing: -0.02em;
+}
+
+.su-gh-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-left: 4px;
+}
+
+.su-gh-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--surface);
+  font-weight: 500;
+}
+
+.su-gh-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.su-gh-url {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-mute);
+  margin-top: 4px;
+}
+
+.su-gh-sub {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--text-2);
+  font-weight: 500;
+  animation: su-fade-in 0.4s ease 0.4s both;
+}
+
+/* ═════════════════ Step 3: CTA ═════════════════ */
+
+.su-step3 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.su-main-cta {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.su-cta-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: su-pop-in 0.6s var(--ease-enter) both;
+}
+
+.su-cta-icon {
+  color: var(--accent);
+}
+
+.su-cta-title {
+  font-family: var(--font-display-cn);
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.su-cta-sub {
+  font-family: var(--font-body);
+  font-size: 24px;
+  color: var(--text-2);
+  margin: 0;
+}
+
+.su-cta-footer {
+  display: flex;
+  gap: 12px;
+  animation: su-fade-in 0.4s ease 0.4s both;
+}
+
+/* ═════════════════ Keyframes ═════════════════ */
+
+@keyframes su-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes su-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

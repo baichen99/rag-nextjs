@@ -1,0 +1,680 @@
+/* ── Q2 Hybrid · 怎么提升召回 ── */
+/* 前缀: q2- */
+
+.q2-scene {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.q2-main {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* ═════════════════ Step 0: Wrong → Right ═════════════════ */
+
+.q2-step0 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q2-vs-row {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  animation: q2-pop-in 0.5s var(--ease-enter) both;
+}
+
+.q2-wrong-card {
+  width: 280px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  opacity: 0.7;
+}
+
+.q2-wrong-tag {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+}
+
+.q2-wrong-icon {
+  width: 48px;
+  height: 48px;
+  margin-top: 8px;
+  color: var(--text-2);
+}
+
+.q2-wrong-text {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.q2-vs-arrow {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 48px;
+  color: var(--accent);
+  animation: q2-fade-in 0.4s ease 0.3s both;
+}
+
+.q2-right-card {
+  width: 280px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.q2-right-tag {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+}
+
+.q2-right-icon {
+  width: 48px;
+  height: 48px;
+  margin-top: 8px;
+  color: var(--accent-2-ink);
+}
+
+.q2-right-text {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.q2-vs-sub {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-mute);
+  letter-spacing: 0.08em;
+  animation: q2-fade-in 0.4s ease 0.5s both;
+}
+
+/* ═════════════════ Step 1: BM25 vs Vector ═════════════════ */
+
+.q2-step1 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q2-retriever-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  animation: q2-pop-in 0.5s var(--ease-enter) both;
+}
+
+.q2-ret-card {
+  width: 280px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.q2-ret-visual {
+  width: 200px;
+  min-height: 140px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+}
+
+.q2-kw {
+  padding: 6px 12px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: var(--r-xs);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.q2-kw-1 { transform: rotate(-3deg); }
+.q2-kw-2 { transform: rotate(2deg); }
+.q2-kw-3 { transform: rotate(-1deg); }
+.q2-kw-4 { transform: rotate(3deg); }
+.q2-kw-5 { transform: rotate(-2deg); }
+
+.q2-vector-vis {
+  position: relative;
+  background: var(--accent-2-soft);
+}
+
+.q2-vec-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-2);
+}
+
+.q2-vec-line {
+  position: absolute;
+  width: 80px;
+  height: 2px;
+  background: var(--accent-2);
+  opacity: 0.4;
+  transform: rotate(30deg);
+}
+
+.q2-ret-desc {
+  font-family: var(--font-display-cn);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.q2-ret-sub {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-mute);
+}
+
+.q2-ret-vs {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 40px;
+  color: var(--text-faint);
+}
+
+.q2-fusion-badge {
+  animation: q2-fade-in 0.4s ease 0.4s both;
+}
+
+/* ═════════════════ Step 2: 整体对比 ═════════════════ */
+
+.q2-step2 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q2-step-label {
+  animation: q2-fade-in 0.3s ease both;
+}
+
+.q2-compare-row {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  animation: q2-pop-in 0.5s var(--ease-enter) 0.1s both;
+}
+
+.q2-compare-card {
+  width: 240px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.q2-version-tag {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-mute);
+  margin-top: 4px;
+}
+
+.q2-compare-num {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 72px;
+  color: var(--text);
+  line-height: 0.9;
+}
+
+.q2-compare-pct {
+  font-size: 40px;
+  color: var(--text-2);
+}
+
+.q2-compare-label {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-mute);
+}
+
+.q2-change-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: q2-fade-in 0.4s ease 0.3s both;
+}
+
+.q2-change-num {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+.q2-change-arrow-icon {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 36px;
+  color: var(--text-faint);
+}
+
+.q2-suspense-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: q2-fade-in 0.4s ease 0.5s both;
+}
+
+.q2-suspense-mark {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 36px;
+  color: var(--accent);
+}
+
+.q2-suspense-text span:last-child {
+  font-family: var(--font-body);
+  font-size: 20px;
+  color: var(--text-2);
+}
+
+/* ═════════════════ Step 3: 分类别柱状图 ═════════════════ */
+
+.q2-step3 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q2-main-chart {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.q2-chart-label {
+  animation: q2-fade-in 0.3s ease both;
+}
+
+.q2-bar-chart {
+  display: flex;
+  gap: 48px;
+  align-items: flex-end;
+  height: 240px;
+  animation: q2-pop-in 0.5s var(--ease-enter) 0.1s both;
+}
+
+.q2-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.q2-bar-pair {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 180px;
+}
+
+.q2-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.q2-bar {
+  border-radius: 4px 4px 0 0;
+  transition: height 0.6s var(--ease-smooth);
+}
+
+.q2-bar-v1 {
+  background: var(--text-mute);
+  opacity: 0.5;
+}
+
+.q2-bar-v2 {
+  background: var(--accent-2);
+}
+
+.q2-bar-wow {
+  background: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.q2-bar-val {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.q2-bar-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.q2-bar-label-wow {
+  color: var(--accent);
+}
+
+.q2-bar-wow-badge {
+  position: absolute;
+  top: -24px;
+  right: -20px;
+  padding: 4px 10px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  border-radius: var(--r-xs);
+  animation: q2-pop-in 0.4s var(--ease-enter) 0.6s both;
+}
+
+.q2-chart-legend {
+  display: flex;
+  gap: 24px;
+  animation: q2-fade-in 0.4s ease 0.5s both;
+}
+
+.q2-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.q2-legend-bar {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+/* ═════════════════ Step 4: Code highlight ═════════════════ */
+
+.q2-step4 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q2-main-code {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.q2-code-label {
+  animation: q2-fade-in 0.3s ease both;
+}
+
+.q2-code-card {
+  padding: 36px 44px;
+  min-width: 680px;
+  animation: q2-pop-in 0.5s var(--ease-enter) 0.1s both;
+}
+
+.q2-code-block {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.q2-code-line {
+  white-space: pre;
+}
+
+.q2-code-indent {
+  padding-left: 24px;
+}
+
+.q2-code-highlight {
+  background: rgba(255, 122, 89, 0.15);
+  margin: 0 -12px;
+  padding: 2px 12px;
+  border-radius: 4px;
+  border-left: 3px solid var(--accent);
+}
+
+/* Extra syntax tokens for q2 */
+.tk-s { color: #A5F3C0; }  /* string */
+
+.q2-story-note {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: q2-fade-in 0.4s ease 0.4s both;
+}
+
+.q2-note-text {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-2);
+}
+
+/* ═════════════════ Step 5: 对比卡 + 金句 ═════════════════ */
+
+.q2-step5 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q2-compare-cards {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  animation: q2-pop-in 0.5s var(--ease-enter) both;
+}
+
+.q2-hand-card {
+  width: 260px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.q2-hand-icon {
+  width: 40px;
+  height: 40px;
+  margin-top: 4px;
+  color: var(--text-2);
+}
+
+.q2-hand-title {
+  font-family: var(--font-display-cn);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.q2-hand-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.q2-hand-list li {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-2);
+  padding-left: 16px;
+  position: relative;
+}
+
+.q2-hand-list li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.q2-vs-or {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--text-faint);
+}
+
+.q2-official-card {
+  width: 260px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.q2-off-icon {
+  width: 40px;
+  height: 40px;
+  margin-top: 4px;
+  color: var(--accent-2-ink);
+}
+
+.q2-off-title {
+  font-family: var(--font-display-cn);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.q2-off-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.q2-off-list li {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--accent-2-ink);
+  padding-left: 16px;
+  position: relative;
+}
+
+.q2-off-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-2-ink);
+}
+
+.q2-quote-card {
+  margin-top: 8px;
+  padding: 24px 40px;
+  border-left: 4px solid var(--accent);
+  animation: q2-fade-in 0.5s ease 0.4s both;
+}
+
+.q2-quote-mark {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 48px;
+  color: var(--accent);
+  line-height: 0.5;
+}
+
+.q2-quote-text {
+  font-family: var(--font-display-cn);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 8px 0 0;
+  line-height: 1.5;
+}
+
+/* ═════════════════ Keyframes ═════════════════ */
+
+@keyframes q2-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes q2-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

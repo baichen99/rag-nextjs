@@ -1,0 +1,266 @@
+/* ── Preview · 整体预告 ── */
+/* 前缀: pr- */
+
+.pr-scene {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ═════════════════ Step 0: 5 个问题 ═════════════════ */
+
+.pr-step0 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pr-main {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+.pr-top-label {
+  animation: pr-fade-in 0.4s ease both;
+}
+
+.pr-q-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 720px;
+}
+
+.pr-q-card {
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: pr-pop-in 0.45s var(--ease-enter) both;
+}
+
+.pr-q-accent {
+  box-shadow: 6px 6px 0 var(--accent);
+}
+
+.pr-q-num {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--accent);
+  min-width: 48px;
+  letter-spacing: -0.02em;
+}
+
+.pr-q-text {
+  font-family: var(--font-display-cn);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ═════════════════ Step 1: 折线图 ═════════════════ */
+
+.pr-step1 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pr-main-chart {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.pr-chart-label {
+  animation: pr-fade-in 0.3s ease both;
+}
+
+.pr-chart-card {
+  padding: 32px 40px;
+  width: 920px;
+  animation: pr-pop-in 0.5s var(--ease-enter) 0.1s both;
+}
+
+.pr-chart-svg {
+  width: 100%;
+  height: 320px;
+}
+
+.pr-tick-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--text-mute);
+  text-anchor: end;
+  letter-spacing: 0.06em;
+}
+
+.pr-x-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--text-2);
+  text-anchor: middle;
+  letter-spacing: 0.04em;
+}
+
+.pr-legend-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--text-2);
+  letter-spacing: 0.06em;
+}
+
+.pr-crash-anno {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  justify-content: flex-end;
+}
+
+.pr-crash-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--danger);
+  font-weight: 500;
+}
+
+.pr-tech-row {
+  display: flex;
+  gap: 12px;
+  animation: pr-fade-in 0.4s ease 0.4s both;
+}
+
+/* ═════════════════ Step 2: 5 列并排 ═════════════════ */
+
+.pr-step2 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pr-main-grid {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.pr-grid-label {
+  animation: pr-fade-in 0.3s ease both;
+}
+
+.pr-version-grid {
+  display: flex;
+  gap: 16px;
+  animation: pr-pop-in 0.5s var(--ease-enter) 0.1s both;
+}
+
+.pr-version-card {
+  width: 170px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pr-v-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+}
+
+.pr-v-id {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 32px;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  margin-top: 4px;
+}
+
+.pr-v-name {
+  font-family: var(--font-display-cn);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pr-v-tech {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.4;
+}
+
+.pr-v5-card {
+  box-shadow: 6px 6px 0 var(--danger);
+}
+
+.pr-v-crash {
+  margin-top: 4px;
+}
+
+.pr-gh-hint {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: pr-fade-in 0.4s ease 0.5s both;
+}
+
+.pr-gh-text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-2);
+  letter-spacing: 0.06em;
+}
+
+/* ═════════════════ Keyframes ═════════════════ */
+
+@keyframes pr-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes pr-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

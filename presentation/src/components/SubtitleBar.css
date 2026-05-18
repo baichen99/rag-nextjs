@@ -1,0 +1,30 @@
+.subtitle-bar {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-7);
+  transform: translateX(-50%);
+  max-width: min(1600px, 92%);
+  z-index: 8;
+  pointer-events: none;
+  padding: var(--space-3) var(--space-5);
+  background: rgba(0, 0, 0, 0.72);
+  border-radius: var(--r-sm);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.subtitle-bar-text {
+  margin: 0;
+  font-family: var(--font-display-cn);
+  font-size: clamp(22px, 1.85vw, 34px);
+  font-weight: 600;
+  color: #f4f4f5;
+  line-height: 1.42;
+  text-align: center;
+  letter-spacing: var(--track-snug);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

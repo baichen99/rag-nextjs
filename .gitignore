@@ -65,8 +65,11 @@ eval-dataset.ts
 eval-metrics.ts
 eval-runner.ts
 
-# presentation sub-project
-/presentation
+# presentation sub-project (keep source, ignore build artifacts)
+/presentation/node_modules
+/presentation/dist
+/presentation/dist-ssr
+/presentation/*.local
 
 # sibling projects (not part of this repo)
 

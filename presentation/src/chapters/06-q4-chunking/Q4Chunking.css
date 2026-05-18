@@ -1,0 +1,525 @@
+/* ── Q4 Chunking · 长文档怎么处理 ── */
+/* 前缀: q4- */
+
+.q4-scene {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.q4-main {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* ═════════════════ Step 0: Wrong → Right ═════════════════ */
+
+.q4-step0 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q4-vs-row {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  animation: q4-pop-in 0.5s var(--ease-enter) both;
+}
+
+.q4-wrong-card {
+  width: 300px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  opacity: 0.7;
+}
+
+.q4-wrong-tag {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+}
+
+.q4-wrong-icon {
+  width: 48px;
+  height: 48px;
+  margin-top: 8px;
+  color: var(--text-2);
+}
+
+.q4-wrong-text {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.q4-vs-arrow {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 48px;
+  color: var(--accent);
+  animation: q4-fade-in 0.4s ease 0.3s both;
+}
+
+.q4-right-card {
+  width: 300px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.q4-right-tag {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+}
+
+.q4-right-icon {
+  width: 48px;
+  height: 48px;
+  margin-top: 8px;
+  color: var(--accent-2-ink);
+}
+
+.q4-right-text {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.q4-vs-sub {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-mute);
+  letter-spacing: 0.08em;
+  animation: q4-fade-in 0.4s ease 0.5s both;
+}
+
+/* ═════════════════ Step 1: Document tree ═════════════════ */
+
+.q4-step1 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q4-tree-label {
+  animation: q4-fade-in 0.3s ease both;
+}
+
+.q4-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: q4-pop-in 0.5s var(--ease-enter) 0.1s both;
+}
+
+.q4-tree-root {
+  width: 280px;
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.q4-tree-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--text);
+}
+
+.q4-tree-name {
+  font-family: var(--font-display-cn);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.q4-tree-meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-mute);
+  margin-left: auto;
+}
+
+.q4-tree-arrow {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--accent);
+}
+
+.q4-tree-parents {
+  display: flex;
+  gap: 16px;
+}
+
+.q4-tree-parent {
+  width: 200px;
+  padding: 16px 20px;
+  position: relative;
+  overflow: hidden;
+  animation: q4-pop-in 0.4s var(--ease-enter) both;
+}
+
+.q4-parent-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.q4-parent-name {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.q4-tree-children {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 500px;
+}
+
+.q4-tree-child {
+  padding: 8px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-xs);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: q4-pop-in 0.3s var(--ease-enter) both;
+}
+
+.q4-child-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-2);
+}
+
+.q4-child-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-2);
+}
+
+/* ═════════════════ Step 2: Split screen ═════════════════ */
+
+.q4-step2 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q4-split-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  animation: q4-pop-in 0.5s var(--ease-enter) both;
+}
+
+.q4-split-card {
+  width: 340px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.q4-split-vis {
+  width: 100%;
+  padding: 20px;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+}
+
+.q4-chunk-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.q4-chunk-block {
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.q4-chunk-line {
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+  width: 100%;
+}
+
+.q4-chunk-line.short {
+  width: 60%;
+}
+
+.q4-parent-block {
+  padding: 16px;
+  background: var(--surface);
+  border: 1.5px solid var(--accent-2);
+  border-radius: var(--r-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.q4-parent-line {
+  height: 4px;
+  background: var(--accent-2);
+  border-radius: 2px;
+  width: 100%;
+}
+
+.q4-parent-line.short {
+  width: 70%;
+}
+
+.q4-split-desc {
+  font-family: var(--font-display-cn);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.q4-split-sub {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-mute);
+}
+
+.q4-split-vs {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 32px;
+  color: var(--text-faint);
+}
+
+/* ═════════════════ Step 3: Counter-intuitive metrics ═════════════════ */
+
+.q4-step3 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q4-step-label {
+  animation: q4-fade-in 0.3s ease both;
+}
+
+.q4-counter-row {
+  display: flex;
+  gap: 32px;
+  animation: q4-pop-in 0.5s var(--ease-enter) 0.1s both;
+}
+
+.q4-counter-card {
+  width: 280px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.q4-counter-name {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.q4-counter-change {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.q4-counter-old {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 36px;
+  color: var(--text-mute);
+}
+
+.q4-counter-arrow {
+  font-family: var(--font-display-en);
+  font-size: 24px;
+  color: var(--text-faint);
+}
+
+.q4-counter-new {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 48px;
+  color: var(--text);
+}
+
+.q4-counter-down {
+  color: var(--danger);
+}
+
+.q4-counter-up {
+  color: var(--accent-2);
+}
+
+.q4-counter-badge {
+  margin-top: 4px;
+}
+
+.q4-counter-insight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: q4-fade-in 0.4s ease 0.4s both;
+}
+
+.q4-counter-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--accent-2);
+}
+
+.q4-counter-text {
+  font-family: var(--font-display-cn);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ═════════════════ Step 4: Code + Quote ═════════════════ */
+
+.q4-step4 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q4-code-label {
+  animation: q4-fade-in 0.3s ease both;
+}
+
+.q4-code-card {
+  padding: 32px 40px;
+  min-width: 720px;
+  max-width: 900px;
+  animation: q4-pop-in 0.5s var(--ease-enter) 0.1s both;
+  overflow-x: auto;
+}
+
+.q4-code-block {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.8;
+  min-width: min-content;
+}
+
+.q4-code-line {
+  white-space: pre;
+}
+
+.q4-code-indent {
+  padding-left: 24px;
+}
+
+.q4-code-indent2 {
+  padding-left: 48px;
+}
+
+.q4-code-indent3 {
+  padding-left: 72px;
+}
+
+.q4-code-comment {
+  color: #6B9B8A;
+  font-style: italic;
+}
+
+.q4-quote {
+  margin-top: 4px;
+  padding: 20px 36px;
+  border-left: 4px solid var(--accent-2);
+  animation: q4-fade-in 0.5s ease 0.4s both;
+  max-width: 800px;
+}
+
+.q4-quote-mark {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 40px;
+  color: var(--accent-2);
+  line-height: 0.5;
+}
+
+.q4-quote-text {
+  font-family: var(--font-display-cn);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 8px 0 0;
+  line-height: 1.5;
+}
+
+/* ═════════════════ Keyframes ═════════════════ */
+
+@keyframes q4-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes q4-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
