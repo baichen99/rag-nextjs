@@ -198,7 +198,7 @@ BM25 是经典的关键词检索算法，计算"文档中出现查询词的频�
 
 ```mermaid
 flowchart LR
-    Q[用户查询<br/>"hydration failed"] --> BM25
+    Q("用户查询<br/>hydration failed") --> BM25
     subgraph 文档库
         D1["文档A：<br/>hydration failed...<br/>score: 8.5"] --> BM25
         D2["文档B：<br/>rendering...<br/>score: 0.2"] --> BM25
