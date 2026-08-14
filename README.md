@@ -1,3 +1,5 @@
+
+
 # Next.js Docs RAG - 5 版本演进教程
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbaichen99%2Frag-nextjs)
@@ -491,12 +493,16 @@ const reranked = await rerank(question, ..., 5);         // <- 改这里
 
 ### 使用不同的 Embedding 模型
 
-在 `src/lib/embeddings.ts` 中修改 model 名称：
+在 `src/lib/embeddings.ts` 中修改 `modelName`（实际使用 LangChain 的 `OpenAIEmbeddings` 并指向 DashScope 兼容端点）：
 ```typescript
-export const embeddings = new DashScopeEmbeddings({
+import { OpenAIEmbeddings } from '@langchain/openai';
+
+export const embeddings = new OpenAIEmbeddings({
   modelName: 'text-embedding-v3',  // <- 改成其他模型
   apiKey: env.DASHSCOPE_API_KEY,
-  batchSize: 10,
+  configuration: {
+    baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+  },
 });
 ```
 
